@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Splash Screen Demo',
+      // title: 'Splash Screen Demo',
+      debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );
   }
@@ -68,6 +69,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 class BottomNavigationMainScreen extends StatefulWidget{
+  const BottomNavigationMainScreen({super.key});
+
   @override
   State<BottomNavigationMainScreen> createState() => _BottomNavigationMainScreenState();
 }
@@ -75,7 +78,9 @@ class BottomNavigationMainScreen extends StatefulWidget{
 class _BottomNavigationMainScreenState extends State<BottomNavigationMainScreen> {
   int _currentIndex = 0;
 
-  final _pages = [
+  PageController _pageController = PageController();
+
+  final List<Widget> _pages = [
     StudyPage(),
     QuizPage(),
     ProgressPage(),
@@ -84,20 +89,30 @@ class _BottomNavigationMainScreenState extends State<BottomNavigationMainScreen>
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
-      body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
-        onTap: (index){
+      body: PageView(
+        controller: _pageController,
+        children: _pages,
+        onPageChanged: (index){
           setState(() {
             _currentIndex = index;
           });
         },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
+        onTap: (index){
+          _pageController.animateToPage(
+            index,
+            duration: Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+        },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.book),
+            icon: Icon(Icons.home),
             label: 'Study',
           ),
           BottomNavigationBarItem(
@@ -105,11 +120,11 @@ class _BottomNavigationMainScreenState extends State<BottomNavigationMainScreen>
             label: 'Quiz',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.trending_up),
+            icon: Icon(Icons.bar_chart),
             label: 'Progress',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.library_books),
+            icon: Icon(Icons.book),
             label: 'Glossary',
           ),
           BottomNavigationBarItem(
@@ -127,8 +142,58 @@ class StudyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Study Page'),
+    final List<String> topics = [
+      'Data Representation',
+      'Data Transmission',
+      'Hardware',
+      'Software',
+      'The Internet',
+      'Automated Technologies',
+      'Computational Thinking',
+      'Algorithms',
+      'Programming',
+      'Databases',
+      'Boolean Logic'
+    ];
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Study Page'),
+      ),
+      body: ListView.builder(
+        itemCount: topics.length,
+        itemBuilder: (context, index){
+          return ListTile(
+            title: Text(topics[index]),
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TopicDetailPage(topic: topics[index]),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class TopicDetailPage extends StatelessWidget {
+  final String topic;
+
+  const TopicDetailPage({super.key, required this.topic});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(topic),
+      ),
+      body: Center(
+        child: Text('Details for $topic'),
+      ),
     );
   }
 }
@@ -161,7 +226,7 @@ class GlossaryPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Progress Page'),
+      child: Text('Glossary Page'),
     );
   }
 }
@@ -172,7 +237,7 @@ class SettingsPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Progress Page'),
+      child: Text('Settings Page'),
     );
   }
 }
