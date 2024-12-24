@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:igsce_cs/pages/quiz_type.dart';
 
 void main() {
   runApp(MyApp());
@@ -191,9 +192,30 @@ class TopicDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(topic),
       ),
-      body: Center(
-        child: Text('Details for $topic'),
-      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Introduction to $topic',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 16.0),
+            Text('This is the introduction to $topic. It is a very important topic that you need to understand.',
+            style: TextStyle(fontSize: 16.0),
+            ),
+            SizedBox(height: 16.0),
+            Image.network('https://via.placeholder.com/200'),
+            SizedBox(height: 16.0),
+            Text('This is a sample image'),
+            // More text and images can come here...
+          ],
+        ),
+      )
     );
   }
 }
@@ -203,8 +225,58 @@ class QuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Quiz Page'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Choose Quiz Type'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => QuizType1Page()
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueAccent,
+                foregroundColor: Colors.white,
+                minimumSize: Size(350, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              child: Text('Quiz Type 1',
+              style: TextStyle(fontSize: 20),
+              ),
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => QuizType2Page()
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueAccent,
+                foregroundColor: Colors.white,
+                minimumSize: Size(350, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              child: Text('Quiz Type 2',
+              style: TextStyle(fontSize: 20)
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
