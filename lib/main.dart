@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:igsce_cs/pages/quiz_type.dart';
-
+import 'package:flutter/services.dart' show rootBundle;
 void main() {
   runApp(MyApp());
 }
@@ -79,7 +79,7 @@ class BottomNavigationMainScreen extends StatefulWidget{
 class _BottomNavigationMainScreenState extends State<BottomNavigationMainScreen> {
   int _currentIndex = 0;
 
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   final List<Widget> _pages = [
     StudyPage(),
@@ -138,25 +138,32 @@ class _BottomNavigationMainScreenState extends State<BottomNavigationMainScreen>
   }
 }
 
-class StudyPage extends StatelessWidget {
+class StudyPage extends StatefulWidget {
   const StudyPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<String> topics = [
-      'Data Representation',
-      'Data Transmission',
-      'Hardware',
-      'Software',
-      'The Internet',
-      'Automated Technologies',
-      'Computational Thinking',
-      'Algorithms',
-      'Programming',
-      'Databases',
-      'Boolean Logic'
-    ];
+  _StudyPageState createState() => _StudyPageState();
+}
 
+class _StudyPageState extends State<StudyPage> {
+  List<String> topics = [];
+
+  @override
+  void initState(){
+    super.initState();
+    loadTopics();
+  }
+
+  Future<void> loadTopics() async{
+    final String response = await rootBundle.loadString('assets/topics.txt');
+    final List<String> loadedTopics = response.split('\n').map((topic) => topic.trim()).toList();
+    setState(() {
+      topics = loadedTopics;
+    });
+  }
+
+  @override
+  Widget build(BuildContext build){
     return Scaffold(
       appBar: AppBar(
         title: Text('Study Page'),
@@ -175,7 +182,7 @@ class StudyPage extends StatelessWidget {
               );
             },
           );
-        },
+        }
       ),
     );
   }
