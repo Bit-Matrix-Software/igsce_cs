@@ -171,16 +171,23 @@ class _StudyPageState extends State<StudyPage> {
       body: ListView.builder(
         itemCount: topics.length,
         itemBuilder: (context, index){
-          return ListTile(
-            title: Text(topics[index]),
-            onTap: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TopicDetailPage(topic: topics[index]),
-                ),
-              );
-            },
+          return Card(
+            color: Colors.blue.shade600,
+            margin: EdgeInsets.all(10),
+            child: ListTile(
+              title: Text(
+                topics[index],
+                style: TextStyle(color: Colors.white)
+              ),
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TopicDetailPage(topic: topics[index]),
+                  ),
+                );
+              },
+            ),
           );
         }
       ),
