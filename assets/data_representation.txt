@@ -1,0 +1,20 @@
+1.1 DECIMAL, BINARY & HEXADECIMAL
+
+Humans use the denary (decimal) number system everyday. This system consists of ten symbols:
+0, 1, 2, 3, 4, 5, 6, 7, 8 and 9. These symbols are used to write numbers, for example, 823.
+This number is made up of 8 hundreds (100s), 2 tens (10s) and 3 ones (1s). The order of the
+number is important because the column values are ten times bigger than the previous value as
+we move from right to left. Because it uses ten symbols, decimal or denary is known as the 
+base 10 number system. However, denary is not the only number system.
+
+An alternative number system is called binary. It consists of only two symbols: 0 and 1.
+Just as in denary, the values of a binary number are twice as big as the previous one, as 
+we move from right to left. The column values for a binary number, from left to right, would be:
+128, 64, 32, 16, 8, 4, 2 and 1. Since binary uses only two symbols, it is known as a base 2
+number system. This number system is the only one understood by computers.
+
+Programmers make use of another number system called hexadecimal (hex for short). Hex uses
+sixteen symbols, thus it is a base 16 number system. It uses the symbols 0 - 9 for the first ten
+digits, just like decimal, then the letters A - F for the other six symbols. The column values
+for base 16 are based on multiples of 16, so the first two columns are: 16 and 1. The second
+column is sixteen times larger than the first column.
