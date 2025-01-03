@@ -65,16 +65,45 @@ class _StudyPageState extends State<StudyPage> {
   }
 }
 
-class TopicDetailPage extends StatelessWidget {
+class TopicDetailPage extends StatefulWidget {
   final String topic;
-
   const TopicDetailPage({super.key, required this.topic});
 
+  @override
+  State<TopicDetailPage> createState() => _TopicDetailPageState();
+}
+
+class _TopicDetailPageState extends State<TopicDetailPage> {
+  String topicContent = '';
+
+  @override
+  void initState(){
+    super.initState();
+    loadTopicContent();
+  }
+
+  Future<void> loadTopicContent() async{
+    try{
+      final String response = await rootBundle.loadString('assets/text_files/${widget.topic.toLowerCase().replaceAll(' ', '_')}.txt');
+      setState((){
+        topicContent = response;
+      });
+    }catch(e){
+      setState(() {
+        topicContent = 'Error loading topic content';
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(topic),
+        title: Text(
+          widget.topic,
+          style: TextStyle(
+            fontFamily: 'Poppins',
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -82,27 +111,26 @@ class TopicDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Introduction to $topic',
+              'Introduction to ${widget.topic}',
               style: TextStyle(
-                fontSize: 16.0,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Poppins',
               ),
             ),
             SizedBox(height: 16.0),
-            Text('This is the introduction to $topic. It is a very important topic that you need to understand.',
-            style: TextStyle(
-              fontSize: 16.0,
-              fontFamily: 'Poppins'),
+            Text(
+              topicContent,
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Poppins',
+              ),
+              textAlign: TextAlign.justify,
             ),
-            SizedBox(height: 16.0),
-            Image.network('https://via.placeholder.com/200'),
-            SizedBox(height: 16.0),
-            Text('This is a sample image'),
-            // More text and images can come here...
+            // Images and more content to be added here
           ],
         ),
-      )
+      ),
     );
   }
 }

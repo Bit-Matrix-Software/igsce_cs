@@ -1,11 +1,11 @@
-1. Data Representation
-2. Data Transmission
-3. Hardware
-4. Software
-5. The Internet
-6. Automated Technologies
-7. Computational Thinking
-8. Algorithms
-9. Programming
-10. Databases
-11. Boolean Logic
+Data Representation
+Data Transmission
+Hardware
+Software
+The Internet
+Automated Technologies
+Computational Thinking
+Algorithms
+Programming
+Databases
+Boolean Logic
