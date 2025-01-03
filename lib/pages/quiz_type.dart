@@ -7,10 +7,18 @@ class QuizType1Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quiz Type 1'),
+        title: Text(
+          'Quiz Type 1',
+          style: TextStyle(
+            fontFamily: 'Poppins'
+          ),),
       ),
       body: Center(
-        child: Text('Quiz Type 1 Page'),
+        child: Text(
+          'Quiz Type 1 Page',
+          style: TextStyle(
+            fontFamily: 'Poppins',
+          ),),
       ),
     );
   }
@@ -23,10 +31,18 @@ class QuizType2Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quiz Type 2'),
+        title: Text(
+          'Quiz Type 2', 
+          style: TextStyle(
+            fontFamily: 'Poppins',
+          )),
       ),
       body: Center(
-        child: Text('Quiz Type 2 Page'),
+        child: Text(
+          'Quiz Type 2 Page',
+          style: TextStyle(
+            fontFamily: 'Poppins',
+          ),),
       ),
     );
   }

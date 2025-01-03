@@ -60,18 +60,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/topics.txt
-    - assets/data_representation.txt
-    - assets/data_transmission.txt
-    - assets/hardware.txt
-    - assets/software.txt
-    - assets/the_internet.txt
-    - assets/communication.txt
-    - assets/automated_technologies.txt
-    - assets/computational_thinking.txt
-    - assets/algorithms.txt
-    - assets/programming.txt
-    - assets/databases.txt
+    - assets/text_files/
+    - assets/images/
+    - assets/fonts/
+    
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
